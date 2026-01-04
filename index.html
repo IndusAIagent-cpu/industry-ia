@@ -6,20 +6,22 @@
 <title>IndustriAI – Agents IA pour l'Industrie</title>
 <style>
   body {margin:0; font-family: Arial; background:#f5f7fa; color:#111; scroll-behavior: smooth;}
-  nav {position: fixed; top:0; width:100%; background:#0f172a; color:white; display:flex; justify-content:center; padding:15px; z-index:1000;}
-  nav a {color:white; text-decoration:none; margin:0 20px; font-weight:bold;}
-  header {background:#0f172a; color:white; text-align:center; padding:120px 20px;}
+  nav {position: fixed; top:0; width:100%; background:#0f172a; color:white; display:flex; justify-content:center; padding:15px; z-index:1000; box-shadow:0 2px 6px rgba(0,0,0,0.3);}
+  nav a {color:white; text-decoration:none; margin:0 20px; font-weight:bold; transition:0.3s;}
+  nav a:hover {color:#2563eb;}
+  header {background:#0f172a; color:white; text-align:center; padding:140px 20px 80px 20px;}
   header h1{font-size:3em; margin-bottom:10px;}
   header p{font-size:1.2em; margin-bottom:20px;}
-  header a{display:inline-block; background:#2563eb; color:white; padding:15px 30px; border-radius:8px; text-decoration:none;}
+  header a{display:inline-block; background:#2563eb; color:white; padding:15px 30px; border-radius:8px; text-decoration:none; transition:0.3s;}
+  header a:hover {transform:scale(1.05);}
   section {padding:80px 20px; max-width:1200px; margin:auto; opacity:0; transform:translateY(50px); transition: all 0.8s ease;}
   section.visible {opacity:1; transform:translateY(0);}
   .cards {display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
-  .card {background:white; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center;}
+  .card {background:white; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; transition:0.3s;}
+  .card:hover {transform:scale(1.03);}
   .card img {width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
-  .card h3{margin-bottom:10px; color:#0f172a;}
+  .section-title {text-align:center; margin-bottom:40px; font-size:2.5em; color:#0f172a;}
   footer{text-align:center;padding:30px 20px;color:#666;background:#e2e8f0;}
-  a:hover {transform: scale(1.05); transition:0.3s;}
 </style>
 </head>
 <body>
@@ -28,6 +30,7 @@
   <a href="#accueil">Accueil</a>
   <a href="#solutions">Solutions IA</a>
   <a href="#offres">Offres</a>
+  <a href="#agents3D">Agents 3D</a>
   <a href="#contact">Contact</a>
 </nav>
 
@@ -38,7 +41,7 @@
 </header>
 
 <section id="solutions">
-  <h2 style="text-align:center; margin-bottom:40px;">Nos solutions IA</h2>
+  <h2 class="section-title">Nos solutions IA</h2>
   <div class="cards">
     <div class="card">
       <img src="https://images.unsplash.com/photo-1595433562696-7998d71e5a39?auto=format&fit=crop&w=600&q=80" alt="Maintenance">
@@ -64,7 +67,7 @@
 </section>
 
 <section id="offres" style="background-color:#e2e8f0;">
-  <h2 style="text-align:center; margin-bottom:40px;">Nos offres</h2>
+  <h2 class="section-title">Nos offres</h2>
   <div class="cards">
     <div class="card">
       <img src="https://images.unsplash.com/photo-1605902711622-cfb43c44367d?auto=format&fit=crop&w=600&q=80" alt="Starter">
@@ -84,14 +87,14 @@
   </div>
 </section>
 
-<section id="agents3D" style="height:500px; text-align:center;">
-  <h2>Nos Agents IA (3D)</h2>
-  <p>Les avatars 3D humanoïdes pour représenter vos agents IA</p>
+<section id="agents3D" style="height:600px; text-align:center;">
+  <h2 class="section-title">Nos Agents IA (3D)</h2>
+  <p>Avatars 3D humanoïdes pour représenter vos agents IA</p>
   <div id="3dmodel" style="width:100%; height:100%;"></div>
 </section>
 
 <section id="contact" style="text-align:center;">
-  <h2>Contactez-nous</h2>
+  <h2 class="section-title">Contactez-nous</h2>
   <p>Envoyez un email pour un audit gratuit</p>
   <a href="mailto:contact@industriai.fr">Contact</a>
 </section>
@@ -100,4 +103,51 @@
   © 2026 IndustriAI – 100 % gratuit au lancement
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/three@
+<script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/loaders/GLTFLoader.js"></script>
+<script>
+  // Animation scroll
+  const sections = document.querySelectorAll('section');
+  window.addEventListener('scroll', () => {
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if(top < window.innerHeight - 100){
+        sec.classList.add('visible');
+      }
+    });
+  });
+
+  // 3D Model
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setSize(window.innerWidth,600);
+  document.getElementById('3dmodel').appendChild(renderer.domElement);
+
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(10,10,10);
+  scene.add(light);
+
+  const loader = new THREE.GLTFLoader();
+  loader.load(
+    'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r137/examples/models/gltf/RobotExpressive/RobotExpressive.glb',
+    function(gltf){
+      scene.add(gltf.scene);
+      gltf.scene.position.y = -1.5;
+    },
+    undefined,
+    function(error){console.error(error);}
+  );
+
+  camera.position.z = 5;
+  function animate(){requestAnimationFrame(animate); renderer.render(scene,camera);}
+  animate();
+
+  window.addEventListener('resize', ()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,600);
+  });
+</script>
+</body>
+</html>
