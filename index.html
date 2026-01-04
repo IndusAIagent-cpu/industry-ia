@@ -16,9 +16,9 @@
   section.visible {opacity:1; transform:translateY(0);}
   .cards {display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
   .card {background:white; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center;}
+  .card img {width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
   .card h3{margin-bottom:10px; color:#0f172a;}
   footer{text-align:center;padding:30px 20px;color:#666;background:#e2e8f0;}
-  /* Animation hover boutons */
   a:hover {transform: scale(1.05); transition:0.3s;}
 </style>
 </head>
@@ -40,20 +40,54 @@
 <section id="solutions">
   <h2 style="text-align:center; margin-bottom:40px;">Nos solutions IA</h2>
   <div class="cards">
-    <div class="card"><h3>Maintenance</h3><p>Réduction des pannes et arrêts machines.</p></div>
-    <div class="card"><h3>Production</h3><p>Optimisation des cadences et des flux.</p></div>
-    <div class="card"><h3>Qualité</h3><p>Détection automatique des non-conformités.</p></div>
-    <div class="card"><h3>Logistique</h3><p>Prévision des stocks et achats intelligents.</p></div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1595433562696-7998d71e5a39?auto=format&fit=crop&w=600&q=80" alt="Maintenance">
+      <h3>Maintenance</h3>
+      <p>Réduction des pannes et arrêts machines.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1581092580492-6c4217fa947d?auto=format&fit=crop&w=600&q=80" alt="Production">
+      <h3>Production</h3>
+      <p>Optimisation des cadences et des flux.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1581091012184-b0f5d6c2b932?auto=format&fit=crop&w=600&q=80" alt="Qualité">
+      <h3>Qualité</h3>
+      <p>Détection automatique des non-conformités.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1581092795365-7330eeebc4f2?auto=format&fit=crop&w=600&q=80" alt="Logistique">
+      <h3>Logistique</h3>
+      <p>Prévision des stocks et achats intelligents.</p>
+    </div>
   </div>
 </section>
 
 <section id="offres" style="background-color:#e2e8f0;">
   <h2 style="text-align:center; margin-bottom:40px;">Nos offres</h2>
   <div class="cards">
-    <div class="card"><h3>Starter</h3><p>1 agent IA – Audit inclus</p></div>
-    <div class="card"><h3>Pro</h3><p>Jusqu’à 3 agents IA</p></div>
-    <div class="card"><h3>Enterprise</h3><p>Sur mesure</p></div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1605902711622-cfb43c44367d?auto=format&fit=crop&w=600&q=80" alt="Starter">
+      <h3>Starter</h3>
+      <p>1 agent IA – Audit inclus</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1581091012184-b0f5d6c2b932?auto=format&fit=crop&w=600&q=80" alt="Pro">
+      <h3>Pro</h3>
+      <p>Jusqu’à 3 agents IA</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1605902711622-cfb43c44367d?auto=format&fit=crop&w=600&q=80" alt="Enterprise">
+      <h3>Enterprise</h3>
+      <p>Sur mesure</p>
+    </div>
   </div>
+</section>
+
+<section id="agents3D" style="height:500px; text-align:center;">
+  <h2>Nos Agents IA (3D)</h2>
+  <p>Les avatars 3D humanoïdes pour représenter vos agents IA</p>
+  <div id="3dmodel" style="width:100%; height:100%;"></div>
 </section>
 
 <section id="contact" style="text-align:center;">
@@ -66,18 +100,4 @@
   © 2026 IndustriAI – 100 % gratuit au lancement
 </footer>
 
-<script>
-  // Animation au scroll
-  const sections = document.querySelectorAll('section');
-  window.addEventListener('scroll', () => {
-    sections.forEach(sec => {
-      const top = sec.getBoundingClientRect().top;
-      if(top < window.innerHeight - 100){
-        sec.classList.add('visible');
-      }
-    });
-  });
-</script>
-
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/three@
